@@ -20,8 +20,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.mahmoud.githubrepos.presentation.theme.theme.GiyHubReposTheme
-import com.mahmoud.giyhubrepos.R
+import com.example.odcgithubrepoapp.R
+import com.example.odcgithubrepoapp.presentation.theme.ODCGithubRepoAppTheme
 
 @Composable
 fun IssueItem(modifier: Modifier = Modifier) {
@@ -80,7 +80,7 @@ fun IssueItem(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun RepoItemPreview() {
-    GiyHubReposTheme {
+    ODCGithubRepoAppTheme() {
         IssueItem()
     }
 }
