@@ -1,10 +1,7 @@
 package com.example.odcgithubrepoapp.data.mapper
 
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.data_model.repo_details.RepoDetailsDataModel
-import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.data_model.repo_list.Item
-import com.example.odcgithubrepoapp.domain.model.GithubReposDomainModel
 import com.example.odcgithubrepoapp.domain.model.RepoDetailsDomainModel
-import com.example.odcgithubrepoapp.presentation.screens.repo_details_screen.model.RepoDetailsUiModel
 
 fun RepoDetailsDataModel.toRepoDetailsDomainModel(): RepoDetailsDomainModel {
     return RepoDetailsDomainModel(

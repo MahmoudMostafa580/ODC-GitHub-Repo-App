@@ -92,15 +92,19 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
 
-    implementation(libs.coroutines)
     implementation(libs.retrofit)
     implementation(libs.okhttp3)
     implementation(libs.gson)
     implementation(libs.gson.converter)
+
+    implementation(libs.coroutines)
 
     implementation(libs.room)
     ksp(libs.room.compiler)
 
     implementation(libs.datastore)
     implementation(libs.lottie.compose)
+
+    implementation (project(":domain"))
+    implementation (project(":data"))
 }

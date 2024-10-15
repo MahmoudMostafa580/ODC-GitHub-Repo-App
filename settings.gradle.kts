@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "ODC Github Repo App"
 include(":app")
- 
+include(":data")
+include(":domain")

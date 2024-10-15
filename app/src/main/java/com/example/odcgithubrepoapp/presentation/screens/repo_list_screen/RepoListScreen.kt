@@ -59,7 +59,8 @@ fun RepoListContent(
     Scaffold(
         modifier = modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
+            .background(MaterialTheme.colorScheme.background)
+            .padding(horizontal = 8.dp),
         topBar = {
             AppBar(
                 title = R.string.app_name,
@@ -85,8 +86,6 @@ fun RepoListContent(
             repoListUiSate.repoList.isNotEmpty() -> {
                 LazyColumn(
                     Modifier.padding(innerPadding)
-                        .padding(horizontal = 16.dp)
-                        .padding(bottom = 16.dp)
                 ) {
                     items(repoListUiSate.repoList) { githubRepoUiModel ->
                         RepoItem(

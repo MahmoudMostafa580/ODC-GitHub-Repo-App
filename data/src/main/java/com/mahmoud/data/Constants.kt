@@ -1,4 +1,4 @@
-package com.example.odcgithubrepoapp.data
+package com.mahmoud.data
 
 class Constants {
     companion object {
