@@ -4,8 +4,9 @@ import com.example.odcgithubrepoapp.data.data_sources.remote.GithubRemoteDataSou
 import com.example.odcgithubrepoapp.data.mapper.toRepoIssuesDomainModel
 import com.example.odcgithubrepoapp.domain.model.RepoIssuesDomainModel
 import com.example.odcgithubrepoapp.domain.repository.GithubRepoIssuesRepository
+import javax.inject.Inject
 
-class RepoIssuesImpl(
+class RepoIssuesImpl @Inject constructor(
     private val githubRemoteDataSource: GithubRemoteDataSource
 ) : GithubRepoIssuesRepository {
     override suspend fun fetchRepoIssues(owner: String, name: String): List<RepoIssuesDomainModel> {

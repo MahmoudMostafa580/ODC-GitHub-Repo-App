@@ -7,14 +7,17 @@ import com.example.odcgithubrepoapp.domain.usecase.FetchRepoIssuesListUseCase
 import com.example.odcgithubrepoapp.presentation.mapper.toCustomExceptionRemoteUiModel
 import com.example.odcgithubrepoapp.presentation.mapper.toRepoIssuesUiModel
 import com.example.odcgithubrepoapp.presentation.screens.repoIssuesScreen.model.RepoIssuesUiState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RepoIssuesViewModel(
+@HiltViewModel
+class RepoIssuesViewModel @Inject constructor(
     private val repoIssuesListUseCase: FetchRepoIssuesListUseCase
 ) : ViewModel() {
 

@@ -3,6 +3,8 @@ package com.example.odcgithubrepoapp.di
 import com.example.odcgithubrepoapp.data.data_sources.local.GithubLocalDataSource
 import com.example.odcgithubrepoapp.data.data_sources.remote.GithubRemoteDataSource
 import com.example.odcgithubrepoapp.data.repository.GithubReposRepositoryImpl
+import com.example.odcgithubrepoapp.data.repository.RepoIssuesImpl
+import com.example.odcgithubrepoapp.domain.repository.GithubRepoIssuesRepository
 import com.example.odcgithubrepoapp.domain.repository.GithubReposRepository
 import dagger.Module
 import dagger.Provides
@@ -21,5 +23,14 @@ object RepositoryModule {
         localDataSource: GithubLocalDataSource
     ): GithubReposRepository {
         return GithubReposRepositoryImpl(githubRemoteDataSource, localDataSource)
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideRepoIssuesRepository(
+        githubRemoteDataSource: GithubRemoteDataSource
+    ): GithubRepoIssuesRepository {
+        return RepoIssuesImpl(githubRemoteDataSource)
     }
 }

@@ -9,7 +9,7 @@ import retrofit2.http.Path
 
 interface RepoIssuesApi {
     @GET("repos/{$OWNER_KEY}/{$REPO_NAME_KEY}/issues")
-    fun fetchRepoIssues(
+    suspend fun fetchRepoIssues(
         @Path(OWNER_KEY) ownerName:String,
         @Path(REPO_NAME_KEY) repoName: String
     ): Response<RepoIssuesDataModel>
