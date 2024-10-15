@@ -7,6 +7,6 @@ data class RepoIssuesUiState(
     val isLoading: Boolean = false,
     val isError: Boolean = false,
     val customRemoteExceptionUiModel: CustomRemoteExceptionUiModel = CustomRemoteExceptionUiModel.Unknown,
-    val repoList: List<RepoIssuesUiModel> = emptyList()
+    val issuesList: List<RepoIssuesUiModel> = emptyList()
 
 )
