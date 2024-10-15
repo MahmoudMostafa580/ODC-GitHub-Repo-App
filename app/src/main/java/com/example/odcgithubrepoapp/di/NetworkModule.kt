@@ -4,6 +4,7 @@ import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.odcgithubrepoapp.data.Constants.Companion.BASE_URL
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.api.RepoDetailsApi
+import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.api.RepoIssuesApi
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.api.RepositoriesListApi
 import dagger.Module
 import dagger.Provides
@@ -33,6 +34,14 @@ object NetworkModule {
         retrofit: Retrofit
     ): RepoDetailsApi {
         return retrofit.create(RepoDetailsApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRepositoryIssuesApi(
+        retrofit: Retrofit
+    ): RepoIssuesApi {
+        return retrofit.create(RepoIssuesApi::class.java)
     }
 
     @Provides

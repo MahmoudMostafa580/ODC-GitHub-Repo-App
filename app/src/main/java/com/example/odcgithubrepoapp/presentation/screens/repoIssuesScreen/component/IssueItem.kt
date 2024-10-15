@@ -21,54 +21,61 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.odcgithubrepoapp.R
+import com.example.odcgithubrepoapp.presentation.screens.repoIssuesScreen.model.RepoIssuesUiModel
 import com.example.odcgithubrepoapp.presentation.theme.ODCGithubRepoAppTheme
 
 @Composable
-fun IssueItem(modifier: Modifier = Modifier) {
+fun IssueItem(
+    repoIssuesUiModel: RepoIssuesUiModel
+) {
     Card(
-        modifier = modifier
+        modifier = Modifier
             .padding(vertical = 4.dp, horizontal = 8.dp)
             .fillMaxWidth(),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.onPrimary
         )
     ) {
-        Row(modifier = modifier.padding(8.dp)) {
+        Row(modifier = Modifier.padding(8.dp)) {
             Image(
                 painter = painterResource(id = R.drawable.ic_issues),
                 contentDescription = null,
-                modifier = modifier
+                modifier = Modifier
                     .size(32.dp)
                     .clip(CircleShape),
             )
             Column(
-                modifier = modifier.padding(start = 8.dp),
+                modifier = Modifier.padding(start = 8.dp),
                 verticalArrangement = Arrangement.SpaceAround
             ) {
                 Row(
-                    modifier = modifier
+                    modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 4.dp)
                 ) {
                     Text(
-                        text = "Issue Title",
-                        modifier = modifier.weight(1f),
+                        text = repoIssuesUiModel.title,
+                        modifier = Modifier.weight(1f),
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.ExtraBold,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
-                    Text(text = "Open", modifier = Modifier.padding(horizontal = 8.dp))
+                    Text(text = repoIssuesUiModel.state, modifier = Modifier.padding(horizontal = 8.dp))
                 }
-                Text(text = "Issue label", modifier = modifier.padding(vertical = 4.dp))
+                Text(text = repoIssuesUiModel.author_association, modifier = Modifier.padding(vertical = 4.dp))
                 Row(
-                    modifier = modifier.padding(vertical = 4.dp),
+                    modifier = Modifier.padding(vertical = 4.dp),
                 ) {
                     Text(
                         text = "Created At:",
                         fontWeight = FontWeight.Bold,
-                        maxLines = 1)
-                    Text(text = "2024-10-11,20:30 PM", modifier = modifier.padding(horizontal = 4.dp))
+                        maxLines = 1
+                    )
+                    Text(
+                        text = repoIssuesUiModel.created_at,
+                        modifier = Modifier.padding(horizontal = 4.dp)
+                    )
                 }
 
             }
@@ -81,6 +88,6 @@ fun IssueItem(modifier: Modifier = Modifier) {
 @Composable
 fun RepoItemPreview() {
     ODCGithubRepoAppTheme() {
-        IssueItem()
+        IssueItem(repoIssuesUiModel = RepoIssuesUiModel("", "", "", ""))
     }
 }
