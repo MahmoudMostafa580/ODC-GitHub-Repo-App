@@ -33,7 +33,7 @@ fun IssueItem(
             .padding(vertical = 4.dp, horizontal = 8.dp)
             .fillMaxWidth(),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.onPrimary
+            containerColor = MaterialTheme.colorScheme.surface
         )
     ) {
         Row(modifier = Modifier.padding(8.dp)) {

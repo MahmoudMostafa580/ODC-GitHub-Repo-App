@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -21,7 +20,6 @@ import com.example.odcgithubrepoapp.R
 import com.example.odcgithubrepoapp.presentation.common_component.AppBar
 import com.example.odcgithubrepoapp.presentation.common_component.ErrorSection
 import com.example.odcgithubrepoapp.presentation.screens.repoIssuesScreen.viewmodel.RepoIssuesViewModel
-import com.example.odcgithubrepoapp.presentation.theme.ODCGithubRepoAppTheme
 import com.mahmoud.githubrepos.presentation.screens.repoIssuesScreen.component.IssueItem
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -29,7 +27,7 @@ import com.mahmoud.githubrepos.presentation.screens.repoIssuesScreen.component.I
 fun ReposIssuesScreen(
     ownerName: String,
     repoName: String,
-    onRetryButtonClicked: () -> Unit
+    onClickBack: () -> Unit
 ) {
 
     val repoIssuesViewModel: RepoIssuesViewModel = hiltViewModel()
@@ -41,9 +39,13 @@ fun ReposIssuesScreen(
 
     Scaffold(modifier = Modifier
         .fillMaxSize()
-        .background(MaterialTheme.colorScheme.background),
+        .background(MaterialTheme.colorScheme.background)
+        .padding(horizontal = 4.dp),
         topBar = {
-            AppBar(title = R.string.issues_app_bar_title, showBackButton = true)
+            AppBar(
+                title = R.string.issues_app_bar_title, showBackButton = true,
+                onBackButtonClicked = onClickBack
+            )
         },
         content = { innerPadding ->
             when {
@@ -56,7 +58,10 @@ fun ReposIssuesScreen(
                         innerPadding = innerPadding,
                         customErrorExceptionUiModel = repoIssuesUiState.customRemoteExceptionUiModel,
                         onRefreshButtonClicked = {
-                            onRetryButtonClicked()
+                            repoIssuesViewModel.requestRepoIssuesList(
+                                ownerName = ownerName,
+                                repoName = repoName
+                            )
                         }
                     )
                 }
@@ -80,11 +85,11 @@ fun ReposIssuesScreen(
 
 }
 
-@Preview(showBackground = true)
-@Composable
-fun RepoIssuesScreen() {
-    ODCGithubRepoAppTheme {
-        ReposIssuesScreen(
-            "", "", onRetryButtonClicked = {})
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun RepoIssuesScreen() {
+//    ODCGithubRepoAppTheme {
+//        ReposIssuesScreen(
+//            "", "", onRetryButtonClicked = {})
+//    }
+//}
