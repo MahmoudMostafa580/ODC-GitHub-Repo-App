@@ -112,14 +112,24 @@ fun TrendingShimmerItem(brush: Brush) {
                     .background(brush)
             )
             Spacer(modifier = Modifier.padding(6.dp))
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                Spacer(
+                    modifier = Modifier
+                        .height(14.dp)
+                        .clip(RoundedCornerShape(10.dp))
+                        .fillMaxWidth(fraction = 0.9f)
+                        .background(brush)
+                )
+                Spacer(
+                    modifier = Modifier
+                        .size(24.dp)
+                        .clip(CircleShape)
+                        .background(brush)
+                        .fillMaxWidth(fraction = 0.2f)
+                )
+            }
 
-            Spacer(
-                modifier = Modifier
-                    .height(24.dp)
-                    .clip(RoundedCornerShape(10.dp))
-                    .fillMaxWidth(fraction = 0.9f)
-                    .background(brush)
-            )
+
         }
     }
     Divider()
