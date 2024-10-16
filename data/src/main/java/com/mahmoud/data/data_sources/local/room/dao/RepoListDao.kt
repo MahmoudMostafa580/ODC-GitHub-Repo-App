@@ -1,5 +1,6 @@
-package com.example.odcgithubrepoapp.data.data_sources.local.room
+package com.mahmoud.data.data_sources.local.room.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -13,5 +14,8 @@ interface RepoListDao {
     suspend fun insertReposList(repoList: List<ReposListEntity>)
 
     @Query("SELECT * FROM ReposListEntity")
-    suspend fun getReposList(): List<ReposListEntity>
+    suspend fun getReposList(): PagingSource<Int, ReposListEntity>
+
+    @Query("DELETE FROM ReposListEntity")
+    suspend fun deleteAllRepos()
 }

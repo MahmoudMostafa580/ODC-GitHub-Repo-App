@@ -3,8 +3,9 @@ package com.example.odcgithubrepoapp.di
 import android.content.Context
 import androidx.room.Room
 import com.example.odcgithubrepoapp.data.data_sources.local.room.GithubRepositoriesDatabase
-import com.example.odcgithubrepoapp.data.data_sources.local.room.RepoListDao
+import com.mahmoud.data.data_sources.local.room.dao.RepoListDao
 import com.example.odcgithubrepoapp.presentation.utils.Constants.Companion.DATABASE_NAME
+import com.mahmoud.data.data_sources.local.room.dao.RepoRemoteKeysDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,7 +33,15 @@ object DatabaseModule {
     @Singleton
     fun provideRepoListDao(
         githubRepositoriesDatabase: GithubRepositoriesDatabase
-    ):RepoListDao {
+    ): RepoListDao {
         return githubRepositoriesDatabase.repoListDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRepoRemoteKeysDao(
+        githubRepositoriesDatabase: GithubRepositoriesDatabase
+    ): RepoRemoteKeysDao {
+        return githubRepositoriesDatabase.repoRemoteKeysDao()
     }
 }

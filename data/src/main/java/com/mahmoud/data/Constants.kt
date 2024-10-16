@@ -5,6 +5,7 @@ class Constants {
 
         const val BASE_URL = "https://api.github.com/"
         const val GITHUB_REPOS_ENDPOINT = "search/repositories?q=language"
+        const val GITHUB_REPOS_SEARCH_ENDPOINT = "search/repositories"
 
         // room
         const val GITHUB_REPOSITORIES_TABLE = "github_repositories_table"

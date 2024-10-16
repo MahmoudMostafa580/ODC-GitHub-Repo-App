@@ -1,7 +1,6 @@
 package com.example.odcgithubrepoapp.data.data_sources.local
 
-import com.example.odcgithubrepoapp.data.data_sources.local.data_store.DataStorePreference
-import com.example.odcgithubrepoapp.data.data_sources.local.room.RepoListDao
+import com.mahmoud.data.data_sources.local.room.dao.RepoListDao
 import com.example.odcgithubrepoapp.data.data_sources.local.room.entities.ReposListEntity
 import javax.inject.Inject
 

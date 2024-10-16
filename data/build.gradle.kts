@@ -56,6 +56,12 @@ dependencies {
 
     implementation(libs.room)
     ksp(libs.room.compiler)
+    implementation(libs.room.paging)
+    implementation(libs.room.runtime)
+
+
+    implementation(libs.paging.compose)
+    implementation(libs.paging.runtime)
 
 
     implementation (project(":domain"))
