@@ -4,8 +4,12 @@ import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.data_model
 import com.mahmoud.data.Constants.Companion.GITHUB_REPOS_ENDPOINT
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface RepositoriesListApi {
     @GET(GITHUB_REPOS_ENDPOINT)
-    suspend fun fetchRepositoriesList(): Response<GithubReposDataModel>
+    suspend fun fetchRepositoriesList(
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int
+    ): Response<GithubReposDataModel>
 }
