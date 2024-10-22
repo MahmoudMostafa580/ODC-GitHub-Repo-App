@@ -11,5 +11,5 @@ data class ReposListEntity(
     val avatar:String,
     val ownerName:String,
     val description:String,
-    val starsCount: String
+    val starsCount: Int
 )

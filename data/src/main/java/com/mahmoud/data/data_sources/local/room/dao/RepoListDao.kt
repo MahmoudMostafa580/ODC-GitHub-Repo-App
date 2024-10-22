@@ -14,7 +14,7 @@ interface RepoListDao {
     suspend fun insertReposList(repoList: List<ReposListEntity>)
 
     @Query("SELECT * FROM ReposListEntity")
-    suspend fun getReposList(): PagingSource<Int, ReposListEntity>
+    suspend fun getReposList(): List<ReposListEntity>
 
     @Query("DELETE FROM ReposListEntity")
     suspend fun deleteAllRepos()
