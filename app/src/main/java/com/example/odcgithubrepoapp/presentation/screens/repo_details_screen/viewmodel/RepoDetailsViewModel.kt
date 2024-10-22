@@ -3,14 +3,10 @@ package com.example.odcgithubrepoapp.presentation.screens.repo_details_screen.vi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.odcgithubrepoapp.domain.model.CustomRemoteExceptionDomainModel
-import com.example.odcgithubrepoapp.domain.usecase.FetchGithubReposListUseCase
 import com.example.odcgithubrepoapp.domain.usecase.FetchRepositoryDetailsUseCase
 import com.example.odcgithubrepoapp.presentation.mapper.toCustomExceptionRemoteUiModel
-import com.example.odcgithubrepoapp.presentation.mapper.toGithubReposUiModel
 import com.example.odcgithubrepoapp.presentation.mapper.toRepoDetailsUiModel
-import com.example.odcgithubrepoapp.presentation.screens.repo_details_screen.model.RepoDetailsUiModel
 import com.example.odcgithubrepoapp.presentation.screens.repo_details_screen.model.RepoDetailsUiState
-import com.example.odcgithubrepoapp.presentation.screens.repo_list_screen.model.RepoListUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
