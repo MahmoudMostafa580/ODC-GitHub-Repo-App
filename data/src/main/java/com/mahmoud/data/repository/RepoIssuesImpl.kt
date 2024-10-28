@@ -1,4 +1,4 @@
-package com.example.odcgithubrepoapp.data.repository
+package com.mahmoud.data.repository
 
 import com.example.odcgithubrepoapp.data.data_sources.remote.GithubRemoteDataSource
 import com.example.odcgithubrepoapp.data.mapper.toRepoIssuesDomainModel
