@@ -1,7 +1,6 @@
 package com.example.odcgithubrepoapp.presentation.mapper
 
 import android.util.Log
-import com.example.odcgithubrepoapp.data.mapper.toCustomRemoteExceptionDomainModel
 import com.example.odcgithubrepoapp.domain.model.CustomRemoteExceptionDomainModel
 import com.example.odcgithubrepoapp.presentation.model.CustomRemoteExceptionUiModel
 

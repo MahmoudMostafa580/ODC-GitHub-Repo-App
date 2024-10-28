@@ -1,7 +1,9 @@
-package com.example.odcgithubrepoapp.data.data_sources.local
+package com.mahmoud.data.data_sources.local
 
+import android.util.Log
 import com.mahmoud.data.data_sources.local.room.dao.RepoListDao
 import com.example.odcgithubrepoapp.data.data_sources.local.room.entities.ReposListEntity
+import com.mahmoud.data.mapper.toCustomRemoteExceptionDomainModel
 import javax.inject.Inject
 
 class GithubLocalDataSource @Inject constructor(
@@ -9,11 +11,19 @@ class GithubLocalDataSource @Inject constructor(
    // private val dataStorePreference: DataStorePreference,
 ) {
     suspend fun getTrendingList(): List<ReposListEntity> {
-        return repoListDao.getReposList()
+        try{
+            Log.d("Fetching data: ", "Fetch from local database")
+            return repoListDao.getReposList()
+        }catch (e: Exception){
+            throw e.toCustomRemoteExceptionDomainModel()
+        }
+
     }
 
     suspend fun insertRepos(repoList: List<ReposListEntity>) {
         repoListDao.insertReposList(repoList)
+        Log.d("Fetching data: ", "Save to local database")
+
     }
 
 }

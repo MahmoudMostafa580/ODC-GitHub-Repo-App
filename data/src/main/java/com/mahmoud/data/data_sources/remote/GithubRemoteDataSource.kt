@@ -1,12 +1,13 @@
 package com.example.odcgithubrepoapp.data.data_sources.remote
 
+import android.util.Log
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.api.RepoDetailsApi
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.api.RepoIssuesApi
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.api.RepositoriesListApi
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.data_model.repo_details.RepoDetailsDataModel
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.data_model.repo_issues.RepoIssuesDataModel
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.data_model.repo_list.GithubReposDataModel
-import com.example.odcgithubrepoapp.data.mapper.toCustomRemoteExceptionDomainModel
+import com.mahmoud.data.mapper.toCustomRemoteExceptionDomainModel
 import javax.inject.Inject
 
 class GithubRemoteDataSource @Inject constructor(
@@ -17,6 +18,7 @@ class GithubRemoteDataSource @Inject constructor(
 
     suspend fun fetchRepositoriesList(): GithubReposDataModel {
         try {
+            Log.d("Fetching data: ", "Fetching from API")
             return repositoryListApi.fetchRepositoriesList().body() as GithubReposDataModel
         } catch (e: Exception) {
             throw e.toCustomRemoteExceptionDomainModel()

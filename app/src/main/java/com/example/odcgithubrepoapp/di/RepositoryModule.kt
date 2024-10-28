@@ -1,11 +1,11 @@
 package com.example.odcgithubrepoapp.di
 
-import com.example.odcgithubrepoapp.data.data_sources.local.GithubLocalDataSource
+import com.mahmoud.data.data_sources.local.GithubLocalDataSource
 import com.example.odcgithubrepoapp.data.data_sources.remote.GithubRemoteDataSource
-import com.example.odcgithubrepoapp.data.repository.GithubReposRepositoryImpl
+import com.mahmoud.data.repository.GithubReposRepositoryImpl
 import com.example.odcgithubrepoapp.data.repository.RepoIssuesImpl
 import com.example.odcgithubrepoapp.domain.repository.GithubRepoIssuesRepository
-import com.example.odcgithubrepoapp.domain.repository.GithubReposRepository
+import com.mahmoud.domain.repository.GithubReposRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

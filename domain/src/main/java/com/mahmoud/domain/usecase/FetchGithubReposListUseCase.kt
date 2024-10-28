@@ -1,7 +1,7 @@
 package com.mahmoud.domain.usecase
 
 import com.example.odcgithubrepoapp.domain.model.GithubReposDomainModel
-import com.example.odcgithubrepoapp.domain.repository.GithubReposRepository
+import com.mahmoud.domain.repository.GithubReposRepository
 import javax.inject.Inject
 
 class FetchGithubReposListUseCase @Inject constructor(

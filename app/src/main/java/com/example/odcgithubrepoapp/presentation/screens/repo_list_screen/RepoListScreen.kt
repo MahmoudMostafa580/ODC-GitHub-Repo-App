@@ -33,15 +33,15 @@ fun RepoListScreen(
     onRepoItemClicked: (String, String) -> Unit
 ) {
     val repoListViewModel: RepoListViewModel = hiltViewModel()
-    LaunchedEffect(Unit) {
-        repoListViewModel.requestGithubRepoList()
-    }
+//    LaunchedEffect(Unit) {
+//        repoListViewModel.requestGithubRepoList()
+//    }
     val repoListUiSate by repoListViewModel.repoListStateFlow.collectAsStateWithLifecycle()
 
     RepoListContent(
         repoListUiSate = repoListUiSate,
         onRefreshButtonClicked = {
-            repoListViewModel.requestGithubRepoList()
+            repoListViewModel.refreshDataAndGetIt()
         },
         onRepoItemClicked = onRepoItemClicked
     )

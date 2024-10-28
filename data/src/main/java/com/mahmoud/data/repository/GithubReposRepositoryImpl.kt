@@ -1,11 +1,11 @@
-package com.example.odcgithubrepoapp.data.repository
+package com.mahmoud.data.repository
 
-import com.example.odcgithubrepoapp.data.data_sources.local.GithubLocalDataSource
+import com.mahmoud.data.data_sources.local.GithubLocalDataSource
 import com.example.odcgithubrepoapp.data.data_sources.remote.GithubRemoteDataSource
 import com.example.odcgithubrepoapp.data.mapper.toRepoDetailsDomainModel
 import com.example.odcgithubrepoapp.domain.model.GithubReposDomainModel
 import com.example.odcgithubrepoapp.domain.model.RepoDetailsDomainModel
-import com.example.odcgithubrepoapp.domain.repository.GithubReposRepository
+import com.mahmoud.domain.repository.GithubReposRepository
 import com.mahmoud.data.mapper.toGithubReposDomainModel
 import com.mahmoud.data.mapper.toRepoEntity
 import javax.inject.Inject

@@ -4,10 +4,10 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.odcgithubrepoapp.domain.model.CustomRemoteExceptionDomainModel
-import com.mahmoud.domain.usecase.FetchGithubReposListUseCase
 import com.example.odcgithubrepoapp.presentation.mapper.toCustomExceptionRemoteUiModel
 import com.example.odcgithubrepoapp.presentation.mapper.toGithubReposUiModel
 import com.example.odcgithubrepoapp.presentation.screens.repo_list_screen.model.RepoListUiState
+import com.mahmoud.domain.usecase.FetchGithubReposListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +21,8 @@ import javax.inject.Inject
 class RepoListViewModel @Inject constructor(
     private val githubReposListUseCase: FetchGithubReposListUseCase
 ) : ViewModel() {
-    private val _repoListStateFlow = MutableStateFlow<RepoListUiState>(RepoListUiState(isLoading = true))
+    private val _repoListStateFlow =
+        MutableStateFlow<RepoListUiState>(RepoListUiState(isLoading = true))
     val repoListStateFlow: StateFlow<RepoListUiState> = _repoListStateFlow.asStateFlow()
 
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
@@ -31,12 +32,37 @@ class RepoListViewModel @Inject constructor(
             customRemoteExceptionUiModel = (throwable as CustomRemoteExceptionDomainModel).toCustomExceptionRemoteUiModel()
         )
     }
+    private val isFirstTime = false
+
     init {
+        viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            if (isFirstTime) {
+                refreshDataAndGetIt()
+            } else {
+                try {
+                    githubReposListUseCase.refreshRepoList()
+                    requestGithubRepoList()
+                } catch (e: Exception) {
+                    requestGithubRepoList()
+//                    Log.e("Refresh Repo list: ", e.message.toString())
+//                    _repoListStateFlow.value = RepoListUiState(
+//                        isLoading = false,
+//                        isError = true,
+//                        customRemoteExceptionUiModel = (e as CustomRemoteExceptionDomainModel).toCustomExceptionRemoteUiModel()
+//                    )
+                }
+            }
+
+        }
+    }
+
+    fun refreshDataAndGetIt() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             try {
                 githubReposListUseCase.refreshRepoList()
-            }catch (e: Exception){
-                Log.e("Refresh Repo list: ", e.message.toString())
+                requestGithubRepoList()
+            } catch (e: Exception) {
+                Log.d("Fetching data: ", "Throw exception!")
                 _repoListStateFlow.value = RepoListUiState(
                     isLoading = false,
                     isError = true,
@@ -46,7 +72,7 @@ class RepoListViewModel @Inject constructor(
         }
     }
 
-    fun requestGithubRepoList() {
+    private fun requestGithubRepoList() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             try {
                 val repoList = githubReposListUseCase.fetchRepoList()
@@ -55,6 +81,7 @@ class RepoListViewModel @Inject constructor(
                     repoList = repoList.map { it.toGithubReposUiModel() }
                 )
             } catch (e: Exception) {
+                Log.d("Fetching data: ", "Throw exception & display error screen")
                 _repoListStateFlow.value = RepoListUiState(
                     isLoading = false,
                     isError = true,
