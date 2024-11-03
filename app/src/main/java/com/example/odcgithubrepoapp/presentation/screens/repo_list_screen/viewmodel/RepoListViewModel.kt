@@ -37,17 +37,19 @@ class RepoListViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            val isFirstTime = checkIsFirstTimeEnterAppUseCase.readIsFirstTime()
+            val isFirstTime = checkIsFirstTimeEnterAppUseCase.readIsFirstTime()?: true
+            Log.d("Is First Time: ","$isFirstTime")
 
-            if (isFirstTime == true) {
-                refreshDataAndGetIt()
+            if (isFirstTime) {
                 Log.d("Is First Time: ","Yes, first time")
+                refreshDataAndGetIt()
+                checkIsFirstTimeEnterAppUseCase.saveIsFirstTime(false)
             } else {
                 try {
                     githubReposListUseCase.refreshRepoList()
                     requestGithubRepoList()
                     Log.d("Is First Time: ","No, not first time")
-                    checkIsFirstTimeEnterAppUseCase.saveIsFirstTime(false)
+//                    checkIsFirstTimeEnterAppUseCase.saveIsFirstTime(false)
                 } catch (e: Exception) {
                     requestGithubRepoList()
 //                    Log.e("Refresh Repo list: ", e.message.toString())

@@ -25,7 +25,7 @@ class DataStorePreference @Inject constructor(
 
     suspend fun saveIsFirstTimeEnterApp(isFirstTime: Boolean = true) {
         context.dataStore.edit { mutablePreferences ->
-            mutablePreferences[PreferenceKeys.isFirstTimeKey] = isFirstTime
+            mutablePreferences[PreferenceKeys.isFirstTimeKey] = isFirstTime == true
         }
     }
 
