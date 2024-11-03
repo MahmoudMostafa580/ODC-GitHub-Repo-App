@@ -6,31 +6,31 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
-import kotlinx.coroutines.flow.Flow
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class DataStorePreference(
-    private val context: Context
+class DataStorePreference @Inject constructor(
+    @ApplicationContext private val context: Context
 ) {
     companion object {
         private object PreferenceKeys {
             val isFirstTimeKey = booleanPreferencesKey("isFirstTime")
         }
+
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
             name = ""
         )
     }
 
-    suspend fun saveIsFirstTimeEnterApp(isFirstTime:Boolean){
+    suspend fun saveIsFirstTimeEnterApp(isFirstTime: Boolean = true) {
         context.dataStore.edit { mutablePreferences ->
             mutablePreferences[PreferenceKeys.isFirstTimeKey] = isFirstTime
         }
     }
 
-    fun readIsFirstTimeEnterApp(): Flow<Boolean> {
-        return flow {
-            context.dataStore.data.first()[PreferenceKeys.isFirstTimeKey]
-        }
+    suspend fun readIsFirstTimeEnterApp(): Boolean? {
+        return context.dataStore.data.first()[PreferenceKeys.isFirstTimeKey]
+
     }
 }

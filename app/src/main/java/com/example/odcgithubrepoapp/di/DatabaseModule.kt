@@ -2,7 +2,7 @@ package com.example.odcgithubrepoapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.odcgithubrepoapp.data.data_sources.local.room.GithubRepositoriesDatabase
+import com.mahmoud.data.data_sources.local.room.GithubRepositoriesDatabase
 import com.mahmoud.data.data_sources.local.room.dao.RepoListDao
 import com.example.odcgithubrepoapp.presentation.utils.Constants.Companion.DATABASE_NAME
 import com.mahmoud.data.data_sources.local.room.dao.RepoRemoteKeysDao
@@ -21,7 +21,7 @@ object DatabaseModule {
     @Singleton
     fun provideGithubRepositoriesDatabase(
         @ApplicationContext context: Context
-    ):GithubRepositoriesDatabase {
+    ): GithubRepositoriesDatabase {
         return Room.databaseBuilder(
             context,
             GithubRepositoriesDatabase::class.java,

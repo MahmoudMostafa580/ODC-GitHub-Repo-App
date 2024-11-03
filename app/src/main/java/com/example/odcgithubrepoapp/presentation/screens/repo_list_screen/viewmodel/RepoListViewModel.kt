@@ -7,6 +7,7 @@ import com.example.odcgithubrepoapp.domain.model.CustomRemoteExceptionDomainMode
 import com.example.odcgithubrepoapp.presentation.mapper.toCustomExceptionRemoteUiModel
 import com.example.odcgithubrepoapp.presentation.mapper.toGithubReposUiModel
 import com.example.odcgithubrepoapp.presentation.screens.repo_list_screen.model.RepoListUiState
+import com.mahmoud.domain.usecase.CheckIsFirstTimeEnterAppUseCase
 import com.mahmoud.domain.usecase.FetchGithubReposListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -19,7 +20,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RepoListViewModel @Inject constructor(
-    private val githubReposListUseCase: FetchGithubReposListUseCase
+    private val githubReposListUseCase: FetchGithubReposListUseCase,
+    private val checkIsFirstTimeEnterAppUseCase: CheckIsFirstTimeEnterAppUseCase
 ) : ViewModel() {
     private val _repoListStateFlow =
         MutableStateFlow<RepoListUiState>(RepoListUiState(isLoading = true))
@@ -32,16 +34,20 @@ class RepoListViewModel @Inject constructor(
             customRemoteExceptionUiModel = (throwable as CustomRemoteExceptionDomainModel).toCustomExceptionRemoteUiModel()
         )
     }
-    private val isFirstTime = false
 
     init {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            if (isFirstTime) {
+            val isFirstTime = checkIsFirstTimeEnterAppUseCase.readIsFirstTime()
+
+            if (isFirstTime == true) {
                 refreshDataAndGetIt()
+                Log.d("Is First Time: ","Yes, first time")
             } else {
                 try {
                     githubReposListUseCase.refreshRepoList()
                     requestGithubRepoList()
+                    Log.d("Is First Time: ","No, not first time")
+                    checkIsFirstTimeEnterAppUseCase.saveIsFirstTime(false)
                 } catch (e: Exception) {
                     requestGithubRepoList()
 //                    Log.e("Refresh Repo list: ", e.message.toString())

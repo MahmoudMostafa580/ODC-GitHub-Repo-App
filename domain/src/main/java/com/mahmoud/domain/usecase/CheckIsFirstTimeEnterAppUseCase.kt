@@ -12,7 +12,7 @@ class CheckIsFirstTimeEnterAppUseCase @Inject constructor(
         isFirstTimeEnterApp.saveIsFirstTimeEnterApp(isFirstTime)
     }
 
-    suspend fun readIsFirstTime(): Flow<Boolean>{
+    suspend fun readIsFirstTime(): Boolean?{
         return isFirstTimeEnterApp.readIsFirstTimeEnterApp()
     }
 }

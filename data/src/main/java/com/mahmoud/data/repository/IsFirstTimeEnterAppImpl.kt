@@ -12,7 +12,7 @@ class IsFirstTimeEnterAppImpl @Inject constructor(
         githubLocalDataSource.saveIsFirstTimeEnterApp(isFirstTime)
     }
 
-    override suspend fun readIsFirstTimeEnterApp(): Flow<Boolean> {
+    override suspend fun readIsFirstTimeEnterApp(): Boolean? {
         return githubLocalDataSource.readIsFirstTimeEnterApp()
     }
 }
