@@ -12,6 +12,6 @@ interface ReposSearchApi {
     suspend fun searchRepos(
         @Query("q") language: String,
 //        @Query("page") page: Int,
-//        @Query("per_page") perPage: Int
+        @Query("per_page") perPage: Int
     ): Response<GithubReposDataModel>
 }

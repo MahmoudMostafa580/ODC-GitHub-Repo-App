@@ -9,8 +9,8 @@ import javax.inject.Inject
 class SearchReposImpl @Inject constructor(
     private val githubRemoteDataSource: GithubRemoteDataSource
 ) : SearchReposRepository {
-    override suspend fun searchRepos(language: String): List<GithubReposDomainModel> {
-        return githubRemoteDataSource.searchRepos(language).items.map { it.toGithubReposDomainModel() }
+    override suspend fun searchRepos(language: String, perPage: Int): List<GithubReposDomainModel> {
+        return githubRemoteDataSource.searchRepos(language, perPage).items.map { it.toGithubReposDomainModel() }
     }
 
 }

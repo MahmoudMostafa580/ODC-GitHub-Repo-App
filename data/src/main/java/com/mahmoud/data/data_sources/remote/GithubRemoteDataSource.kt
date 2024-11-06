@@ -46,9 +46,9 @@ class GithubRemoteDataSource @Inject constructor(
         }
     }
 
-    suspend fun searchRepos(language: String): GithubReposDataModel{
+    suspend fun searchRepos(language: String, perPage: Int): GithubReposDataModel{
         try {
-            return repositorySearchApi.searchRepos(language).body() as GithubReposDataModel
+            return repositorySearchApi.searchRepos(language, perPage).body() as GithubReposDataModel
         }catch (e: Exception){
             throw e.toCustomRemoteExceptionDomainModel()
         }
