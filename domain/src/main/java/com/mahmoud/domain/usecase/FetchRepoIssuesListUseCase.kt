@@ -1,7 +1,7 @@
-package com.example.odcgithubrepoapp.domain.usecase
+package com.mahmoud.domain.usecase
 
 import com.example.odcgithubrepoapp.domain.model.RepoIssuesDomainModel
-import com.example.odcgithubrepoapp.domain.repository.GithubRepoIssuesRepository
+import com.mahmoud.domain.repository.GithubRepoIssuesRepository
 import javax.inject.Inject
 
 class FetchRepoIssuesListUseCase @Inject constructor(

@@ -3,7 +3,7 @@ package com.example.odcgithubrepoapp.presentation.screens.repoIssuesScreen.viewm
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.odcgithubrepoapp.domain.model.CustomRemoteExceptionDomainModel
-import com.example.odcgithubrepoapp.domain.usecase.FetchRepoIssuesListUseCase
+import com.mahmoud.domain.usecase.FetchRepoIssuesListUseCase
 import com.example.odcgithubrepoapp.presentation.mapper.toCustomExceptionRemoteUiModel
 import com.example.odcgithubrepoapp.presentation.mapper.toRepoIssuesUiModel
 import com.example.odcgithubrepoapp.presentation.screens.repoIssuesScreen.model.RepoIssuesUiState

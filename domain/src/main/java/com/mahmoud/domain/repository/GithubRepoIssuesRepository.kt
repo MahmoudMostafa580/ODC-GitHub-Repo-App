@@ -1,4 +1,4 @@
-package com.example.odcgithubrepoapp.domain.repository
+package com.mahmoud.domain.repository
 
 import com.example.odcgithubrepoapp.domain.model.RepoIssuesDomainModel
 
