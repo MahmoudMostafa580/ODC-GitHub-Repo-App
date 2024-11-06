@@ -6,8 +6,10 @@ import com.mahmoud.data.repository.GithubReposRepositoryImpl
 import com.mahmoud.data.repository.RepoIssuesImpl
 import com.mahmoud.domain.repository.GithubRepoIssuesRepository
 import com.mahmoud.data.repository.IsFirstTimeEnterAppImpl
+import com.mahmoud.data.repository.SearchReposImpl
 import com.mahmoud.domain.repository.GithubReposRepository
 import com.mahmoud.domain.repository.IsFirstTimeEnterAppRepository
+import com.mahmoud.domain.repository.SearchReposRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,6 +36,14 @@ object RepositoryModule {
         githubRemoteDataSource: GithubRemoteDataSource
     ): GithubRepoIssuesRepository {
         return RepoIssuesImpl(githubRemoteDataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSearchReposRepository(
+        githubRemoteDataSource: GithubRemoteDataSource
+    ): SearchReposRepository {
+        return SearchReposImpl(githubRemoteDataSource)
     }
 
     @Provides
