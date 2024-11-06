@@ -2,7 +2,7 @@ package com.example.odcgithubrepoapp.data.data_sources.remote
 
 import android.util.Log
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.api.RepoDetailsApi
-import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.api.RepoIssuesApi
+import com.mahmoud.data.data_sources.remote.retrofit.api.RepoIssuesApi
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.api.ReposSearchApi
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.api.RepositoriesListApi
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.data_model.repo_details.RepoDetailsDataModel
