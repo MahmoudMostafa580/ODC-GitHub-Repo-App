@@ -14,8 +14,7 @@ class SearchReposImpl @Inject constructor(
     private val githubRemoteDataSource: GithubRemoteDataSource
 ) : SearchReposRepository {
     override suspend fun searchRepos(
-        language: String,
-        perPage: Int
+        language: String
     ): Flow<PagingData<GithubReposDomainModel>> {
         return Pager(
             config = PagingConfig(pageSize = 10),
