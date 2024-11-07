@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.githubreposapp.presentation.screens.repo_details_screen.RepoDetailsScreen
 import com.example.odcgithubrepoapp.presentation.screens.repo_list_screen.RepoListScreen
+import com.example.odcgithubrepoapp.presentation.screens.repo_search_screen.RepoSearchScreen
 import com.example.odcgithubrepoapp.presentation.utils.Constants.Companion.NAME_ARGUMENT_KEY
 import com.example.odcgithubrepoapp.presentation.utils.Constants.Companion.OWNER_ARGUMENT_KEY
 import com.mahmoud.githubrepos.presentation.screens.repoIssuesScreen.ReposIssuesScreen
@@ -25,7 +26,7 @@ fun AppNavHost() {
                     navController.navigate(Screens.RepoDetailsScreen.passOwnerAndName(ownerName, name))
                 },
                 onSearchClicked = {
-
+                    navController.navigate(Screens.RepoSearchScreen.route)
                 }
             )
         }
@@ -61,6 +62,14 @@ fun AppNavHost() {
                     }
                 )
             }
+        }
+
+        composable(
+            route = Screens.RepoSearchScreen.route
+        ){
+            RepoSearchScreen(
+                onSearchResultClick = {_, _ ->}
+            )
         }
 
         composable(
