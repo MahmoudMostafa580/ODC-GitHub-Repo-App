@@ -68,7 +68,10 @@ fun AppNavHost() {
             route = Screens.RepoSearchScreen.route
         ){
             RepoSearchScreen(
-                onSearchResultClick = {_, _ ->}
+                onSearchResultClick = {_, _ ->},
+                onCloseIconClicked = {
+                    navController.popBackStack()
+                }
             )
         }
 

@@ -28,7 +28,8 @@ import com.example.odcgithubrepoapp.presentation.theme.ODCGithubRepoAppTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RepoSearchScreen(
-    onSearchResultClick: (String, String) -> Unit
+    onSearchResultClick: (String, String) -> Unit,
+    onCloseIconClicked: () -> Unit
 ) {
 
     var textQuery by rememberSaveable { mutableStateOf("") }
@@ -69,6 +70,7 @@ fun RepoSearchScreen(
                                     textQuery = ""
                                 }else{
                                     active = false
+                                    onCloseIconClicked()
                                 }
                             },
                             imageVector = Icons.Default.Close,
@@ -87,12 +89,14 @@ fun RepoSearchScreen(
 
 }
 
+
 @Preview(showBackground = true)
 @Composable
 fun PreviewSearchScreen() {
     ODCGithubRepoAppTheme {
         RepoSearchScreen(
-            onSearchResultClick = { _, _ -> }
+            onSearchResultClick = { _, _ -> },
+            onCloseIconClicked = {}
         )
     }
 }
