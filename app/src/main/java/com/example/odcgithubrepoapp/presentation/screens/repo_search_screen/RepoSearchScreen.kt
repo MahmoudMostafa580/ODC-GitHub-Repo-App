@@ -33,7 +33,7 @@ fun RepoSearchScreen(
 ) {
 
     var textQuery by rememberSaveable { mutableStateOf("") }
-    var active by rememberSaveable { mutableStateOf(true) }
+    var active by rememberSaveable { mutableStateOf(false) }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -52,7 +52,6 @@ fun RepoSearchScreen(
                     active = it
                 },
                 onSearch = { text ->
-                    Log.d("Search text", text)
                     active = false
                 },
                 leadingIcon = {

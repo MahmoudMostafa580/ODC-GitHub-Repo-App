@@ -105,6 +105,9 @@ dependencies {
     implementation(libs.datastore)
     implementation(libs.lottie.compose)
 
+    implementation(libs.paging.compose)
+    implementation(libs.paging.runtime)
+
     implementation (project(":domain"))
     implementation (project(":data"))
 }
