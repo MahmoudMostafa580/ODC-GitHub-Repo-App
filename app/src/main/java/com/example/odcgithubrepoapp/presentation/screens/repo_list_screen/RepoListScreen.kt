@@ -30,7 +30,8 @@ import com.example.odcgithubrepoapp.presentation.theme.ODCGithubRepoAppTheme
 
 @Composable
 fun RepoListScreen(
-    onRepoItemClicked: (String, String) -> Unit
+    onRepoItemClicked: (String, String) -> Unit,
+    onSearchClicked: () -> Unit
 ) {
     val repoListViewModel: RepoListViewModel = hiltViewModel()
 //    LaunchedEffect(Unit) {
@@ -43,7 +44,8 @@ fun RepoListScreen(
         onRefreshButtonClicked = {
             repoListViewModel.refreshDataAndGetIt()
         },
-        onRepoItemClicked = onRepoItemClicked
+        onRepoItemClicked = onRepoItemClicked,
+        onSearchClicked = onSearchClicked
     )
 
 }
@@ -54,17 +56,19 @@ fun RepoListContent(
     modifier: Modifier = Modifier,
     repoListUiSate: RepoListUiState,
     onRefreshButtonClicked :() -> Unit,
-    onRepoItemClicked: (String, String) -> Unit
+    onRepoItemClicked: (String, String) -> Unit,
+    onSearchClicked: () -> Unit
 ) {
     Scaffold(
         modifier = modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-            .padding(horizontal = 8.dp),
+            .background(MaterialTheme.colorScheme.background),
         topBar = {
             AppBar(
                 title = R.string.app_name,
-                showBackButton = false
+                showBackButton = false,
+                showSearchIcon = true,
+                onSearchIconClicked = onSearchClicked
             )
         }
     ) { innerPadding ->
@@ -85,7 +89,9 @@ fun RepoListContent(
             }
             repoListUiSate.repoList.isNotEmpty() -> {
                 LazyColumn(
-                    Modifier.padding(innerPadding)
+                    Modifier
+                        .padding(innerPadding)
+                        .padding(horizontal = 8.dp)
                 ) {
                     items(repoListUiSate.repoList) { githubRepoUiModel ->
                         RepoItem(
@@ -106,7 +112,8 @@ private fun PreviewRepoListScreen() {
         RepoListContent(
             repoListUiSate = fakeRepoListUiState ,
             onRefreshButtonClicked = {},
-            onRepoItemClicked = {_,_ -> }
+            onRepoItemClicked = {_,_ -> },
+            onSearchClicked = {}
         )
     }
 }
@@ -118,7 +125,8 @@ private fun PreviewRepoListScreenLoading() {
         RepoListContent(
             repoListUiSate = fakeRepoListLoadingUiState ,
             onRefreshButtonClicked = {},
-            onRepoItemClicked = {_,_ -> }
+            onRepoItemClicked = {_,_ -> },
+            onSearchClicked = {}
         )
     }
 }
@@ -130,7 +138,8 @@ private fun PreviewRepoListScreenError() {
         RepoListContent(
             repoListUiSate = fakeRepoListErrorUiState,
             onRefreshButtonClicked = {},
-            onRepoItemClicked = {_,_ -> }
+            onRepoItemClicked = {_,_ -> },
+            onSearchClicked = {}
         )
     }
 }

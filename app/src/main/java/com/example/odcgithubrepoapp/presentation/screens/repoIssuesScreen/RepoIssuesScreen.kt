@@ -39,11 +39,11 @@ fun ReposIssuesScreen(
 
     Scaffold(modifier = Modifier
         .fillMaxSize()
-        .background(MaterialTheme.colorScheme.background)
-        .padding(horizontal = 8.dp),
+        .background(MaterialTheme.colorScheme.background),
         topBar = {
             AppBar(
-                title = R.string.issues_app_bar_title, showBackButton = true,
+                title = R.string.issues_app_bar_title,
+                showBackButton = true,
                 onBackButtonClicked = onClickBack
             )
         },
@@ -70,6 +70,7 @@ fun ReposIssuesScreen(
                     LazyColumn(
                         modifier = Modifier
                             .padding(innerPadding)
+                            .padding(horizontal = 8.dp)
                     ) {
                         items(items = repoIssuesUiState.issuesList) { repoIssuesUiModel ->
                             IssueItem(repoIssuesUiModel = repoIssuesUiModel)

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ODC Github Repo App</string>
+    <string name="app_name">ODC Github Repo</string>
 
     // details screen
     <string name="details_app_bar_title">Details</string>
