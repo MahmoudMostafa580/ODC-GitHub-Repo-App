@@ -23,7 +23,7 @@ val LightGray = Color(0xFF929292)
 //Dark mode colors
 val dark_background = Color(0xFF000000)
 val dark_surface = Color(0xFF121212)
-val dark_primary = Color(0xFF7C4DFF)
+val dark_primary = Color(0xFF000000)
 val dark_secondary = Color(0xFF202F85)
 val dark_onBackground = Color(0xFFFFFFFF)
 val dark_onSurface = Color(0xFFFFFFFF)
