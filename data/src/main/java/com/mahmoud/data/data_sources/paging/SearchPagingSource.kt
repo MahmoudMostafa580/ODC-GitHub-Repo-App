@@ -14,7 +14,7 @@ class SearchPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GithubReposDomainModel> {
         val currentPage = params.key ?: 1
         return try {
-            val searchResponse = githubRemoteDataSource.searchRepos(language, perPage = 10)
+            val searchResponse = githubRemoteDataSource.searchRepos(language, currentPage, perPage = 50)
             val endOfPaginationReached = searchResponse.items.isEmpty()
             if (searchResponse.items.isNotEmpty()) {
                 LoadResult.Page(

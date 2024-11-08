@@ -1,7 +1,8 @@
-package com.example.odcgithubrepoapp.presentation.screens.repo_list_screen.model
+package com.example.odcgithubrepoapp.presentation.screens.repo_search_screen.model
 
 import androidx.paging.PagingData
 import com.example.odcgithubrepoapp.presentation.model.CustomRemoteExceptionUiModel
+import com.example.odcgithubrepoapp.presentation.screens.repo_list_screen.model.GithubReposUiModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
 

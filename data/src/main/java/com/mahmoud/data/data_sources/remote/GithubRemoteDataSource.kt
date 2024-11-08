@@ -2,12 +2,12 @@ package com.example.odcgithubrepoapp.data.data_sources.remote
 
 import android.util.Log
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.api.RepoDetailsApi
-import com.mahmoud.data.data_sources.remote.retrofit.api.RepoIssuesApi
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.api.ReposSearchApi
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.api.RepositoriesListApi
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.data_model.repo_details.RepoDetailsDataModel
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.data_model.repo_issues.RepoIssuesDataModel
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.data_model.repo_list.GithubReposDataModel
+import com.mahmoud.data.data_sources.remote.retrofit.api.RepoIssuesApi
 import com.mahmoud.data.mapper.toCustomRemoteExceptionDomainModel
 import javax.inject.Inject
 
@@ -41,15 +41,16 @@ class GithubRemoteDataSource @Inject constructor(
         try {
             return repositoryIssuesApi.fetchRepoIssues(ownerName, repoName)
                 .body() as RepoIssuesDataModel
-        } catch (e: Exception){
+        } catch (e: Exception) {
             throw e.toCustomRemoteExceptionDomainModel()
         }
     }
 
-    suspend fun searchRepos(language: String, perPage: Int): GithubReposDataModel{
+    suspend fun searchRepos(language: String, page: Int, perPage: Int): GithubReposDataModel {
         try {
-            return repositorySearchApi.searchRepos(language, perPage).body() as GithubReposDataModel
-        }catch (e: Exception){
+            return repositorySearchApi.searchRepos(language, page, perPage)
+                .body() as GithubReposDataModel
+        } catch (e: Exception) {
             throw e.toCustomRemoteExceptionDomainModel()
         }
     }

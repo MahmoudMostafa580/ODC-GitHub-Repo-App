@@ -6,8 +6,9 @@ import androidx.paging.map
 import com.example.odcgithubrepoapp.domain.model.CustomRemoteExceptionDomainModel
 import com.example.odcgithubrepoapp.presentation.mapper.toCustomExceptionRemoteUiModel
 import com.example.odcgithubrepoapp.presentation.mapper.toGithubReposUiModel
-import com.example.odcgithubrepoapp.presentation.screens.repo_list_screen.model.SearchRepoUiState
+import com.example.odcgithubrepoapp.presentation.screens.repo_search_screen.model.SearchRepoUiState
 import com.mahmoud.domain.usecase.SearchReposUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,11 +17,12 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class RepoSearchViewModel @Inject constructor(
     private val searchReposUseCase: SearchReposUseCase
 ) : ViewModel() {
     private val _searchRepoStateFlow =
-        MutableStateFlow<SearchRepoUiState>(SearchRepoUiState(isLoading = true))
+        MutableStateFlow<SearchRepoUiState>(SearchRepoUiState(isLoading = false))
     val searchRepoStateFlow = _searchRepoStateFlow.asStateFlow()
 
 

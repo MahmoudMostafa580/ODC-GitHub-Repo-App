@@ -23,7 +23,12 @@ fun AppNavHost() {
         composable(route = Screens.RepoListScreen.route) {
             RepoListScreen(
                 onRepoItemClicked = { ownerName, name ->
-                    navController.navigate(Screens.RepoDetailsScreen.passOwnerAndName(ownerName, name))
+                    navController.navigate(
+                        Screens.RepoDetailsScreen.passOwnerAndName(
+                            ownerName,
+                            name
+                        )
+                    )
                 },
                 onSearchClicked = {
                     navController.navigate(Screens.RepoSearchScreen.route)
@@ -66,9 +71,16 @@ fun AppNavHost() {
 
         composable(
             route = Screens.RepoSearchScreen.route
-        ){
+        ) {
             RepoSearchScreen(
-                onSearchResultClick = {_, _ ->},
+                onSearchResultClick = { ownerName, name ->
+                    navController.navigate(
+                        Screens.RepoDetailsScreen.passOwnerAndName(
+                            ownerName,
+                            name
+                        )
+                    )
+                },
                 onCloseIconClicked = {
                     navController.popBackStack()
                 }
