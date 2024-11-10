@@ -52,6 +52,11 @@ class RepoSearchViewModel @Inject constructor(
 
         )
     }
+    fun clearResultList(){
+        _searchRepoStateFlow.value = SearchRepoUiState(
+            repoList = emptyFlow()
+        )
+    }
 
     fun searchRepos(query: String) {
         startLoading()

@@ -77,8 +77,8 @@ fun RepoSearchScreen(
                 onSearch = { text ->
                     Log.d("Search State: ", "onSearchClicked")
 
-//                    active = false
                     repoSearchViewModel.searchRepos(text)
+
                 },
 
                 leadingIcon = {
@@ -103,6 +103,7 @@ fun RepoSearchScreen(
                     if (active) {
                         Icon(
                             modifier = Modifier.clickable {
+                                repoSearchViewModel.clearResultList()
                                 if (textQuery.isNotEmpty()) {
                                     textQuery = ""
                                     active = false
