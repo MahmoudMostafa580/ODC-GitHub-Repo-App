@@ -17,7 +17,7 @@ class SearchReposImpl @Inject constructor(
         language: String
     ): Flow<PagingData<GithubReposDomainModel>> {
         return Pager(
-            config = PagingConfig(pageSize = 50),
+            config = PagingConfig(pageSize = 20),
             pagingSourceFactory = {
                 SearchPagingSource(githubRemoteDataSource, language)
             }

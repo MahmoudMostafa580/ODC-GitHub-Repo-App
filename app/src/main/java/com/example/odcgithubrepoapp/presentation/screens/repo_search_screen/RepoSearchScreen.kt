@@ -1,5 +1,6 @@
 package com.example.odcgithubrepoapp.presentation.screens.repo_search_screen
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -56,20 +58,43 @@ fun RepoSearchScreen(
                 query = textQuery,
                 onQueryChange = {
                     textQuery = it
+                    if (textQuery.isEmpty()) {
+                        repoSearchViewModel.stopLoading()
+                    } else {
+                        repoSearchViewModel.startLoading()
+
+                    }
+                    Log.d("Search State: ", "onQueryChange")
                 },
                 active = active,
                 onActiveChange = {
                     active = it
+                    Log.d("Search State: ", "onActiveChange")
+
                 },
                 onSearch = { text ->
+                    Log.d("Search State: ", "onSearchClicked")
+
                     active = false
                     repoSearchViewModel.searchRepos(text)
                 },
+
                 leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        contentDescription = "Search icon"
-                    )
+                    if(active){
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = "Search icon"
+                        )
+                    }else{
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = "Back arrow",
+                            modifier = Modifier.clickable {
+                                onCloseIconClicked()
+                            }
+                        )
+                    }
+
 
                 },
                 trailingIcon = {
@@ -78,9 +103,11 @@ fun RepoSearchScreen(
                             modifier = Modifier.clickable {
                                 if (textQuery.isNotEmpty()) {
                                     textQuery = ""
+                                    active = false
+
                                 } else {
                                     active = false
-                                    onCloseIconClicked()
+//                                    onCloseIconClicked()
                                 }
                             },
                             imageVector = Icons.Default.Close,
@@ -110,8 +137,10 @@ fun RepoSearchScreen(
                         )
                     }
 
-                    else -> {
+                    searchRepoUiState.repoList.collectAsLazyPagingItems().itemCount != 0 -> {
                         val result = searchRepoUiState.repoList.collectAsLazyPagingItems()
+                        Log.d("Search Result: ", "${result.itemCount}")
+
                         LazyColumn(
                             Modifier
                                 .padding(PaddingValues(0.dp))
