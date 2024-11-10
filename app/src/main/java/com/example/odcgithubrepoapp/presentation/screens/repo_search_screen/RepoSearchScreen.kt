@@ -17,6 +17,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
+import androidx.compose.material3.SearchBarColors
+import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -49,7 +51,7 @@ fun RepoSearchScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
+            .background(MaterialTheme.colorScheme.surface),
         content = {
             SearchBar(
                 modifier = Modifier
@@ -75,7 +77,7 @@ fun RepoSearchScreen(
                 onSearch = { text ->
                     Log.d("Search State: ", "onSearchClicked")
 
-                    active = false
+//                    active = false
                     repoSearchViewModel.searchRepos(text)
                 },
 
@@ -118,7 +120,11 @@ fun RepoSearchScreen(
                 },
                 placeholder = {
                     Text(text = "Search by language")
-                }
+                },
+                colors = SearchBarDefaults.colors(
+                    containerColor = MaterialTheme.colorScheme.background,
+                    inputFieldColors = SearchBarDefaults.inputFieldColors(cursorColor = MaterialTheme.colorScheme.onSurface),
+                )
             ) {
                 when {
                     searchRepoUiState.isLoading -> {
