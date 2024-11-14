@@ -4,6 +4,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -25,7 +26,9 @@ fun AppBar(
     modifier: Modifier = Modifier,
     showBackButton: Boolean = true,
     titleStyle: TextStyle = MaterialTheme.typography.titleLarge,
-    onBackButtonClicked: () -> Unit = {}
+    onBackButtonClicked: () -> Unit = {},
+    showSearchIcon: Boolean = false,
+    onSearchIconClicked: () -> Unit = {}
 ) {
     CenterAlignedTopAppBar(
         title = {
@@ -43,6 +46,18 @@ fun AppBar(
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
                         contentDescription = null
+                    )
+                }
+            }
+        },
+        actions = {
+            if(showSearchIcon){
+                IconButton(
+                    onClick = {onSearchIconClicked()}
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = "Search Icon"
                     )
                 }
             }

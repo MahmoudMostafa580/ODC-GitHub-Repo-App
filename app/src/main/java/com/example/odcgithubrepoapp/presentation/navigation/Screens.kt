@@ -5,6 +5,7 @@ import com.example.odcgithubrepoapp.presentation.utils.Constants.Companion.OWNER
 import com.example.odcgithubrepoapp.presentation.utils.Constants.Companion.REPO_DETAILS_SCREEN
 import com.example.odcgithubrepoapp.presentation.utils.Constants.Companion.REPO_ISSUES_SCREEN
 import com.example.odcgithubrepoapp.presentation.utils.Constants.Companion.REPO_LIST_SCREEN
+import com.example.odcgithubrepoapp.presentation.utils.Constants.Companion.REPO_SEARCH_SCREEN
 
 
 sealed class Screens(val route: String) {
@@ -23,4 +24,5 @@ sealed class Screens(val route: String) {
             return "$REPO_ISSUES_SCREEN/$owner/$name"
         }
     }
+    data object RepoSearchScreen: Screens(REPO_SEARCH_SCREEN)
 }

@@ -3,7 +3,7 @@ package com.example.odcgithubrepoapp.di
 import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.api.RepoDetailsApi
-import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.api.RepoIssuesApi
+import com.mahmoud.data.data_sources.remote.retrofit.api.RepoIssuesApi
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.api.ReposSearchApi
 import com.example.odcgithubrepoapp.data.data_sources.remote.retrofit.api.RepositoriesListApi
 import com.mahmoud.data.Constants.Companion.BASE_URL
