@@ -18,8 +18,11 @@ fun AppNavHost() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Screens.RepoListScreen.route
+        startDestination = Screens.SplashScreen.route
     ) {
+        composable(route = Screens.SplashScreen.route){
+
+        }
         composable(route = Screens.RepoListScreen.route) {
             RepoListScreen(
                 onRepoItemClicked = { ownerName, name ->
