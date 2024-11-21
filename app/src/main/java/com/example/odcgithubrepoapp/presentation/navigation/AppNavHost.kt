@@ -9,6 +9,7 @@ import androidx.navigation.navArgument
 import com.example.githubreposapp.presentation.screens.repo_details_screen.RepoDetailsScreen
 import com.example.odcgithubrepoapp.presentation.screens.repo_list_screen.RepoListScreen
 import com.example.odcgithubrepoapp.presentation.screens.repo_search_screen.RepoSearchScreen
+import com.example.odcgithubrepoapp.presentation.screens.splash_screen.AnimatedSplashScreen
 import com.example.odcgithubrepoapp.presentation.utils.Constants.Companion.NAME_ARGUMENT_KEY
 import com.example.odcgithubrepoapp.presentation.utils.Constants.Companion.OWNER_ARGUMENT_KEY
 import com.mahmoud.githubrepos.presentation.screens.repoIssuesScreen.ReposIssuesScreen
@@ -21,7 +22,7 @@ fun AppNavHost() {
         startDestination = Screens.SplashScreen.route
     ) {
         composable(route = Screens.SplashScreen.route){
-
+            AnimatedSplashScreen()
         }
         composable(route = Screens.RepoListScreen.route) {
             RepoListScreen(
