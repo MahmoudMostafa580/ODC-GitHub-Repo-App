@@ -108,6 +108,11 @@ dependencies {
     implementation(libs.paging.compose)
     implementation(libs.paging.runtime)
 
+    //splash api
+    implementation(libs.androidx.core.splashscreen)
+    implementation (libs.accompanist.pager.indicators)
+    implementation (libs.androidx.foundation)
+
     implementation (project(":domain"))
     implementation (project(":data"))
 }

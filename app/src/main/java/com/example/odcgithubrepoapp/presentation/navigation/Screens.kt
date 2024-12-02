@@ -7,10 +7,13 @@ import com.example.odcgithubrepoapp.presentation.utils.Constants.Companion.REPO_
 import com.example.odcgithubrepoapp.presentation.utils.Constants.Companion.REPO_LIST_SCREEN
 import com.example.odcgithubrepoapp.presentation.utils.Constants.Companion.REPO_SEARCH_SCREEN
 import com.example.odcgithubrepoapp.presentation.utils.Constants.Companion.SPLASH_SCREEN
+import com.example.odcgithubrepoapp.presentation.utils.Constants.Companion.WELCOME_SCREEN
 
 
 sealed class Screens(val route: String) {
     data object SplashScreen: Screens(SPLASH_SCREEN)
+    data object WelcomeScreen: Screens(WELCOME_SCREEN)
+
     data object RepoListScreen : Screens(REPO_LIST_SCREEN)
     data object RepoDetailsScreen :
         Screens("$REPO_DETAILS_SCREEN/{$OWNER_ARGUMENT_KEY}/{$NAME_ARGUMENT_KEY}") {
