@@ -33,7 +33,12 @@ fun AppNavHost() {
             )
         }
         composable(route = Screens.WelcomeScreen.route){
-            WelcomeScreen()
+            WelcomeScreen(
+                onClick = {
+                    navController.popBackStack()
+                    navController.navigate(Screens.RepoListScreen.route)
+                }
+            )
         }
         composable(route = Screens.RepoListScreen.route) {
             RepoListScreen(
