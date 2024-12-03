@@ -8,10 +8,11 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import javax.inject.Inject
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "on_boarding_state")
 
-class DataStorePreference(
+class DataStorePreference @Inject constructor(
     context: Context
 ) {
     companion object {
