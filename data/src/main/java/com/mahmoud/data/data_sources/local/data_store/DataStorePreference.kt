@@ -6,31 +6,44 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
-import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
-import javax.inject.Inject
 
-class DataStorePreference @Inject constructor(
-    @ApplicationContext private val context: Context
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "on_boarding_state")
+
+class DataStorePreference(
+    context: Context
 ) {
     companion object {
         private object PreferenceKeys {
             val isFirstTimeKey = booleanPreferencesKey("isFirstTime")
         }
 
-        private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
-            name = ""
-        )
+        private object OnBoardingKey {
+            val onBoardingKey = booleanPreferencesKey("on_boarding_completed")
+        }
     }
 
+    private val dataStore = context.dataStore
+
     suspend fun saveIsFirstTimeEnterApp(isFirstTime: Boolean = true) {
-        context.dataStore.edit { mutablePreferences ->
+        dataStore.edit { mutablePreferences ->
             mutablePreferences[PreferenceKeys.isFirstTimeKey] = isFirstTime == true
         }
     }
 
     suspend fun readIsFirstTimeEnterApp(): Boolean? {
-        return context.dataStore.data.first()[PreferenceKeys.isFirstTimeKey]
+        return dataStore.data.first()[PreferenceKeys.isFirstTimeKey]
 
+    }
+
+    suspend fun savaOnBoardingState(completed: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[OnBoardingKey.onBoardingKey] = completed
+        }
+    }
+
+    suspend fun readOnBoardingState(): Boolean? {
+        return dataStore.data.first()[OnBoardingKey.onBoardingKey]
     }
 }

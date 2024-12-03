@@ -21,7 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RepoListViewModel @Inject constructor(
     private val githubReposListUseCase: FetchGithubReposListUseCase,
-    private val checkIsFirstTimeEnterAppUseCase: CheckIsFirstTimeEnterAppUseCase
+//    private val checkIsFirstTimeEnterAppUseCase: CheckIsFirstTimeEnterAppUseCase
 ) : ViewModel() {
     private val _repoListStateFlow =
         MutableStateFlow<RepoListUiState>(RepoListUiState(isLoading = true))
@@ -37,29 +37,9 @@ class RepoListViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
-            val isFirstTime = checkIsFirstTimeEnterAppUseCase.readIsFirstTime()?: true
-            Log.d("Is First Time: ","$isFirstTime")
 
-            if (isFirstTime) {
                 Log.d("Is First Time: ","Yes, first time")
                 refreshDataAndGetIt()
-                checkIsFirstTimeEnterAppUseCase.saveIsFirstTime(false)
-            } else {
-                try {
-                    githubReposListUseCase.refreshRepoList()
-                    requestGithubRepoList()
-                    Log.d("Is First Time: ","No, not first time")
-//                    checkIsFirstTimeEnterAppUseCase.saveIsFirstTime(false)
-                } catch (e: Exception) {
-                    requestGithubRepoList()
-//                    Log.e("Refresh Repo list: ", e.message.toString())
-//                    _repoListStateFlow.value = RepoListUiState(
-//                        isLoading = false,
-//                        isError = true,
-//                        customRemoteExceptionUiModel = (e as CustomRemoteExceptionDomainModel).toCustomExceptionRemoteUiModel()
-//                    )
-                }
-            }
 
         }
     }
