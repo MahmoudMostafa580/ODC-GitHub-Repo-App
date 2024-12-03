@@ -22,19 +22,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.odcgithubrepoapp.presentation.screens.welcome_screen.viewmodel.WelcomeViewModel
 import com.example.odcgithubrepoapp.presentation.theme.LightGray
 import com.google.accompanist.pager.HorizontalPagerIndicator
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WelcomeScreen(
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    welcomeViewModel: WelcomeViewModel = hiltViewModel()
 ) {
     val pages = listOf(
         OnBoardingPage.First,
@@ -55,7 +57,6 @@ fun WelcomeScreen(
             verticalAlignment = Alignment.Top
         ) { position ->
             PagerScreen(onBoardingPage = pages[position])
-
         }
         HorizontalPagerIndicator(
             modifier = Modifier
@@ -66,7 +67,7 @@ fun WelcomeScreen(
             inactiveColor = LightGray,
             activeColor = MaterialTheme.colorScheme.secondary
         )
-        FinishButton(modifier = Modifier.weight(1f), pagerState = pagerState) {
+        FinishButton(modifier = Modifier.weight(1f), pagerState = pagerState,welcomeViewModel){
             onClick()
         }
     }
@@ -107,7 +108,8 @@ fun PagerScreen(onBoardingPage: OnBoardingPage) {
 fun FinishButton(
     modifier: Modifier,
     pagerState: PagerState,
-    onClick: () -> Unit
+    welcomeViewModel: WelcomeViewModel,
+    onClick: () -> Unit,
 ) {
     Row(
         modifier = modifier
@@ -120,7 +122,10 @@ fun FinishButton(
             visible = pagerState.currentPage == 2
         ) {
             Button(
-                onClick = onClick,
+                onClick = {
+                    welcomeViewModel.saveOnBoardingState(true)
+                    onClick()
+                },
                 colors = androidx.compose.material.ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colorScheme.secondary)
             ) {
                 Text(text = "Finish", fontWeight = FontWeight.Bold)
