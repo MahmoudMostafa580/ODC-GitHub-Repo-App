@@ -27,19 +27,11 @@ class GithubLocalDataSource @Inject constructor(
 
     }
 
-    suspend fun saveIsFirstTimeEnterApp(isFirstTime: Boolean){
-        dataStorePreference.saveIsFirstTimeEnterApp(isFirstTime)
-    }
-
-    suspend fun readIsFirstTimeEnterApp(): Boolean? {
-        return dataStorePreference.readIsFirstTimeEnterApp()
-    }
-
     suspend fun saveOnBoardingState(completed: Boolean){
         dataStorePreference.savaOnBoardingState(completed)
     }
 
-    suspend fun readOnBoardingState(): Boolean? {
+    suspend fun readOnBoardingState(): Flow<Boolean> {
         return dataStorePreference.readOnBoardingState()
     }
 

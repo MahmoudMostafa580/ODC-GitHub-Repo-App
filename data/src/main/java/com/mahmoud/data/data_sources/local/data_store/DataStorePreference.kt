@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "on_boarding_state")
@@ -16,9 +17,6 @@ class DataStorePreference @Inject constructor(
     context: Context
 ) {
     companion object {
-        private object PreferenceKeys {
-            val isFirstTimeKey = booleanPreferencesKey("isFirstTime")
-        }
 
         private object OnBoardingKey {
             val onBoardingKey = booleanPreferencesKey("on_boarding_completed")
@@ -27,24 +25,15 @@ class DataStorePreference @Inject constructor(
 
     private val dataStore = context.dataStore
 
-    suspend fun saveIsFirstTimeEnterApp(isFirstTime: Boolean = true) {
-        dataStore.edit { mutablePreferences ->
-            mutablePreferences[PreferenceKeys.isFirstTimeKey] = isFirstTime == true
-        }
-    }
-
-    suspend fun readIsFirstTimeEnterApp(): Boolean? {
-        return dataStore.data.first()[PreferenceKeys.isFirstTimeKey]
-
-    }
-
     suspend fun savaOnBoardingState(completed: Boolean) {
         dataStore.edit { preferences ->
             preferences[OnBoardingKey.onBoardingKey] = completed
         }
     }
 
-    suspend fun readOnBoardingState(): Boolean? {
-        return dataStore.data.first()[OnBoardingKey.onBoardingKey]
+    suspend fun readOnBoardingState(): Flow<Boolean> {
+        return dataStore.data.map { pref ->
+            pref[OnBoardingKey.onBoardingKey] ?: false
+        }
     }
 }
