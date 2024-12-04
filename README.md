@@ -18,6 +18,8 @@ This is Android app that browses GitHub repositories and displays its details as
 # Platform
 * Android
 # Features
+* Splash Screen
+* Onboarding Screen
 * Browse a list of Repos
 * Display every repo details
 * Display every repo issues and there state (open-closed)
@@ -38,6 +40,8 @@ This is Android app that browses GitHub repositories and displays its details as
 * Coil for Image loading
 * Shimmer effect for loading state
 * Navigation Components
+* Splash API
+* Horizontal Pager
 # Architecture pattern
 * MVVM (model view viewmodel)
 
