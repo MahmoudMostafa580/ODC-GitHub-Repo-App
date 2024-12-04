@@ -24,16 +24,6 @@ fun AppNavHost(
         navController = navController,
         startDestination = startDestination
     ) {
-        composable(route = Screens.SplashScreen.route) {
-            AnimatedSplashScreen(
-                onAnimationFinished = {
-                    navController.popBackStack()
-                    navController.navigate(
-                        Screens.RepoListScreen.route
-                    )
-                }
-            )
-        }
         composable(route = Screens.WelcomeScreen.route) {
             WelcomeScreen(
                 onClick = {
