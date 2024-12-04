@@ -2,4 +2,10 @@
 <resources>
 
     <style name="Theme.ODCGithubRepoApp" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.CustomSplashTheme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_github_placeholser</item>
+        <item name="windowSplashScreenAnimationDuration">2000</item>
+        <item name="postSplashScreenTheme">@style/Theme.ODCGithubRepoApp</item>
+    </style>
 </resources>

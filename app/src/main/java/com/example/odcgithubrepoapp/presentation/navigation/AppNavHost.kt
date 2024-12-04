@@ -16,11 +16,13 @@ import com.example.odcgithubrepoapp.presentation.utils.Constants.Companion.OWNER
 import com.mahmoud.githubrepos.presentation.screens.repoIssuesScreen.ReposIssuesScreen
 
 @Composable
-fun AppNavHost() {
+fun AppNavHost(
+    startDestination: String
+) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Screens.WelcomeScreen.route
+        startDestination = startDestination
     ) {
         composable(route = Screens.SplashScreen.route) {
             AnimatedSplashScreen(

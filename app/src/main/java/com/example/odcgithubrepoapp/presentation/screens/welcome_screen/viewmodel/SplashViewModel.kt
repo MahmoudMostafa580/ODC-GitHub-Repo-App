@@ -7,17 +7,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.odcgithubrepoapp.presentation.navigation.Screens
 import com.mahmoud.domain.usecase.CheckOnBoardingStateUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SplashViewModel(
+@HiltViewModel
+class SplashViewModel @Inject constructor(
     private val checkOnBoardingStateUseCase: CheckOnBoardingStateUseCase
 ) : ViewModel() {
 
     private val _isLoading: MutableState<Boolean> = mutableStateOf(true)
     val isLoading: State<Boolean> = _isLoading
 
-    private val _startDestination: MutableState<String> = mutableStateOf(Screens.WelcomeScreen.route)
-    val startDestination: State<String> = _startDestination
+    private val _startDestination: MutableState<String?> = mutableStateOf(null)
+    val startDestination: State<String?> = _startDestination
 
     init {
         viewModelScope.launch {
