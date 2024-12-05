@@ -7,6 +7,7 @@ import com.example.odcgithubrepoapp.domain.model.CustomRemoteExceptionDomainMode
 import com.example.odcgithubrepoapp.presentation.mapper.toCustomExceptionRemoteUiModel
 import com.example.odcgithubrepoapp.presentation.mapper.toGithubReposUiModel
 import com.example.odcgithubrepoapp.presentation.screens.repo_list_screen.model.RepoListUiState
+import com.mahmoud.domain.usecase.CheckOnBoardingStateUseCase
 import com.mahmoud.domain.usecase.FetchGithubReposListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -20,6 +21,8 @@ import javax.inject.Inject
 @HiltViewModel
 class RepoListViewModel @Inject constructor(
     private val githubReposListUseCase: FetchGithubReposListUseCase,
+    private val checkOnBoardingState: CheckOnBoardingStateUseCase
+
 ) : ViewModel() {
     private val _repoListStateFlow =
         MutableStateFlow<RepoListUiState>(RepoListUiState(isLoading = true))
@@ -35,9 +38,26 @@ class RepoListViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
+            checkOnBoardingState.readOnBoardingState().collect { completed ->
+                Log.d("Is First Time: ", "Yes, first time")
+                if (completed) {
+//                    refreshDataAndGetIt()
+//                    checkOnBoardingState.saveOnBoardingState(true)
 
-                Log.d("Is First Time: ","Yes, first time")
-                refreshDataAndGetIt()
+                    try {
+                        //Get data from remote and save it to local
+                        githubReposListUseCase.refreshRepoList()
+                        //Get data from local
+                        requestGithubRepoList()
+                        Log.d("Is First Time: ", "No, not first time")
+                    } catch (e: Exception) {
+                        requestGithubRepoList()
+                    }
+                } else {
+                    refreshDataAndGetIt()
+                }
+            }
+
 
         }
     }
